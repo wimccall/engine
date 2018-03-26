@@ -188,7 +188,6 @@ PhysicsComponent.prototype.PUpdate = function() {
     this.gameobject.transform.rot = this.body.angle;
 }
 
-// TODO
 PhysicsComponent.prototype.setVelocity = function(x, y) {
     if (!(x instanceof Vector2)) {
         Matter.Body.set(this.body, 'velocity', {x: x, y: y});
@@ -196,7 +195,7 @@ PhysicsComponent.prototype.setVelocity = function(x, y) {
         Matter.Body.set(this.body, 'velocity', {x: x.x, y: x.y});
     }
 }
-// TODO
+
 PhysicsComponent.prototype.setPosition = function(x, y) {
     if (!(x instanceof Vector2)) {
         Matter.Body.set(this.body, 'position', {x: x,y: y});
@@ -204,12 +203,11 @@ PhysicsComponent.prototype.setPosition = function(x, y) {
         Matter.Body.set(this.body, 'position', {x: x.x,y: x.y});
     }
 }
-// TODO
+
 PhysicsComponent.prototype.setMass = function(m) {
     if (!isNaN(m)) Matter.Body.set(this.body, 'mass', m);
 }
 
-// TODO
 PhysicsComponent.prototype.setGravityScale = function (g) {
     this.body.gravityScale = g;
 }

@@ -1,16 +1,21 @@
 var cameras = [];
 
-function Camera(name, bMainCamera) {
+function Camera(name, bMainCamera, viewPortSize) {
     if (bMainCamera) {
         _unsubMainCamera();
         this.bMain = bMainCamera;
     }
     GameObject.call(this, name);
     cameras.push(this);
+    this.viewPortSize = viewPortSize;
 }
 
 Camera.prototype = Object.create(GameObject.prototype);
 Camera.prototype.constructor = Camera;
+
+Camera.prototype.Start = function() {
+    
+}
 
 Camera.prototype.Update = function() {
     if (this.attachedObj) {
@@ -32,6 +37,33 @@ Camera.prototype.setMain = function () {
 
 Camera.prototype.AttachCamera = function(gameobject) {
     this.attachedObj = gameobject;
+}
+
+Camera.prototype.SetDraggable = function() {
+    var canvas = document.getElementsByClassName("engineViewport")[0];
+    this.bDragging = false;
+    // TODO: add mousedown, mousemove, mouseup and mouseleave event listeners
+    canvas.addEventListener('mousedown', function (e) {
+        this.bDragging = true;
+        this.refScreenX = e.screenX;
+        this.refScreenY = e.screenY;
+    }.bind(this));
+    canvas.addEventListener('mouseup', function (e) {
+        this.bDragging = false;
+    }.bind(this));
+    canvas.addEventListener('mousemove', function (e) {
+        if (!this.bDragging) return;
+        this.transform.position.x -= e.screenX - this.refScreenX
+        this.transform.position.y -= e.screenY - this.refScreenY
+        this.refScreenX = e.screenX;
+        this.refScreenY = e.screenY;
+    }.bind(this));
+    canvas.addEventListener('mouseleave', function (e) {
+        this.bDragging = false;
+    }.bind(this));
+    canvas.addEventListener('wheel', function (e) {
+        app.renderer.resize(app.renderer.screen.width * ((1000 + e.deltaY) / 1000), app.renderer.screen.height * ((1000 + e.deltaY) / 1000));
+    }.bind(this));
 }
 
 function _unsubMainCamera(){

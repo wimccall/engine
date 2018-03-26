@@ -15,12 +15,14 @@ function gameLoop(delta){
 }
 
 function PauseState() {
-
+    // do nothing
 }
 
 // Loop that runs when the game is not playing. Called every frame while in edit mode to allow for edit mode scripts
+var editorCam = new Camera("editCam", true);
+editorCam.SetDraggable();
 function EditorState() {
-    // do nothing
+    editorCam.Update();
 }
 
 // This function is called every frame during gameplay. 

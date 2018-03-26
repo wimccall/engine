@@ -28,6 +28,11 @@ function setUpRenderer() {
   
   app.renderer.render(app.stage);
   app.ticker.add(delta => gameLoop(delta));
+  let circle = new PIXI.Graphics();
+  circle.beginFill(0xDA102D);
+  circle.drawCircle(0, 0, 20);
+  circle.endFill();
+  app.stage.addChild(circle);
 }
 
 // ** Physics
