@@ -18,6 +18,7 @@ PIXI.utils.sayHello(type)
 
 // Set up the application
 let app = new Application()
+var world = new PIXI.Container();
 
 function setUpRenderer() {
   app.renderer.backgroundColor = 0x061639;
@@ -32,7 +33,9 @@ function setUpRenderer() {
   circle.beginFill(0xDA102D);
   circle.drawCircle(0, 0, 20);
   circle.endFill();
-  app.stage.addChild(circle);
+  app.stage.addChild(world);
+  app.stage.hitArea = new PIXI.Rectangle(-1000000, -1000000, 2000000, 2000000); // I don't see a problem with this yet... may want to reconsider
+  world.addChild(circle);
 }
 
 // ** Physics

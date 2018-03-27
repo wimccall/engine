@@ -91,7 +91,7 @@ function PhysicsComponent (ownerObject, body) {
 function SpriteRenderer (ownerObject, sprite) { // Pass in a PIXI sprite
     Component.call(this, ownerObject);
     this.sprite = sprite;
-    app.stage.addChild(sprite);
+    world.addChild(sprite);
 }
 
 function CirclePhysics (ownerObject, x, y, radius, options) {
